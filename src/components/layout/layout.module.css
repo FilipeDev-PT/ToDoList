@@ -1,0 +1,23 @@
+.ContainerGlobal {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  .containerContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    justify-content: start;
+    padding: 5%;
+    height: 65%;
+    min-height: 550px;
+    width: calc(200px + 25%);
+    max-width: 400px;
+    background-color: rgb(23, 25, 50);
+    border-radius: 10px;
+  }
+}

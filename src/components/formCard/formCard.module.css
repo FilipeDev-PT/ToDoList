@@ -1,0 +1,91 @@
+.divFormCard {
+  display: flex;
+  width: 100%;
+  height: 25%;
+  padding-top: calc(10px + 2%);
+  align-items: start;
+  border-bottom: 1px solid var(--colorPrimaryWhite);
+
+  .formCard {
+    display: flex;
+    gap: 2%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+
+    & input {
+      display: flex;
+      width: 50%;
+      color: var(--colorPrimaryWhite);
+      background-color: #00000000;
+      border-bottom: 1px solid var(--colorPrimaryWhite);
+    }
+
+    & div {
+      display: flex;
+      gap: 2%;
+      width: 50%;
+
+      & select {
+        background: linear-gradient(
+          to bottom,
+          var(--colorPrimaryOrange),
+          var(--colorSecundaryOrange)
+        );
+        color: var(--colorPrimaryWhite);
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 5px;
+        width: 100px;
+
+        & option {
+          color: var(--colorPrimaryBlack);
+        }
+      }
+
+      & select:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+
+      .butAddNewTask {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        background: linear-gradient(
+          to bottom,
+          var(--colorPrimaryOrange),
+          var(--colorSecundaryOrange)
+        );
+        color: white;
+        font-weight: bolder;
+        border-radius: 10px;
+      }
+
+      .butAddNewTask:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .divFormCard {
+    padding-top: calc(20px + 2%);
+
+    .formCard {
+      flex-direction: column;
+      gap: 10px;
+
+      & input {
+        width: 100%;
+      }
+
+      & div {
+        width: 100%;
+      }
+    }
+  }
+}

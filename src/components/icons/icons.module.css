@@ -1,0 +1,39 @@
+.buttonIcons {
+  background-color: #00000000;
+}
+
+.iconsSearch {
+  display: flex;
+  color: var(--colorPrimaryOrange);
+  height: 20px;
+  width: 20px;
+}
+
+.iconsAdd {
+  display: flex;
+  color: var(--colorPrimaryWhite);
+  height: 17px;
+  width: 20px;
+}
+
+.iconsDelete {
+  display: flex;
+  color: var(--colorPrimaryRed);
+  height: 20px;
+  width: 20px;
+}
+
+.iconsCheck {
+  display: flex;
+  color: var(--colorPrimaryGreen);
+  height: 20px;
+  width: 20px;
+}
+
+.iconsSearch:hover,
+.iconsAdd:hover,
+.iconsDelete:hover,
+.iconsCheck:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
