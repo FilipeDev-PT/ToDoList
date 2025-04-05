@@ -1,9 +1,22 @@
+.pCont {
+  display: flex;
+  position: absolute;
+  font-size: 0.8em;
+  left: -10px;
+  top: 35%;
+}
+
 .divContentTask {
   display: flex;
+  position: relative;
   padding: 2% 5%;
   width: 80%;
-  justify-content: space-between;
   border-bottom: 1px solid white;
+
+  .iconsChecked {
+    display: flex;
+    margin-right: 10px;
+  }
 
   .divContentText {
     display: flex;
@@ -11,10 +24,24 @@
     gap: 5px;
   }
 
-  .divContentIcons {
+  .divStatus {
     display: flex;
-    align-items: end;
-    gap: 10%;
+    position: absolute;
+    right: 25px;
+    top: 65%;
+    font-size: 0.7em;
+    z-index: 2;
+  }
+
+  .divStatusChecked {
+    color: var(--colorSecundaryGreen);
+  }
+
+  .iconsDelete {
+    display: flex;
+    position: absolute;
+    right: 0px;
+    top: 40%;
   }
 }
 

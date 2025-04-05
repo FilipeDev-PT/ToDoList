@@ -1,0 +1,68 @@
+.divFooter {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+
+  .butAdd {
+    display: flex;
+    position: absolute;
+    bottom: 5%;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+    background: linear-gradient(
+      to bottom,
+      var(--colorPrimaryOrange),
+      var(--colorSecundaryOrange)
+    );
+    color: white;
+    font-weight: bolder;
+    border-radius: 50%;
+  }
+
+  .butAdd:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+
+  .divContentButonsRegister {
+    position: absolute;
+    gap: 10px;
+    top: -50%;
+
+    & button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      height: 30px;
+      width: 100px;
+      background: linear-gradient(
+        to bottom,
+        var(--colorPrimaryOrange),
+        var(--colorSecundaryOrange)
+      );
+      color: white;
+      font-weight: bolder;
+      border-radius: 10px;
+    }
+
+    & button:hover {
+      cursor: pointer;
+      transform: scale(1.05);
+    }
+  }
+}
+
+.selectRegisterOpen {
+  display: flex;
+}
+
+.selectRegisterClose {
+  display: none;
+}

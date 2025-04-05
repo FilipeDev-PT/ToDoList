@@ -1,10 +1,7 @@
 import style from "./map.module.css";
-import { useGlobalContext } from "../../hooks/globalContext";
 import Tasks from "../tasks/tasks";
 
-export default function Map() {
-  const { tasksFiltered } = useGlobalContext();
-
+export default function Map({ tasksFiltered }) {
   return (
     <div className={style.divContentMap}>
       {tasksFiltered.map((task, index) => {

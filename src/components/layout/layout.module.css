@@ -17,7 +17,7 @@
     min-height: 550px;
     width: calc(200px + 25%);
     max-width: 400px;
-    background-color: rgb(23, 25, 50);
+    background-color: var(--colorPrimaryBlue);
     border-radius: 10px;
   }
 }

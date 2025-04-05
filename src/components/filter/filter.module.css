@@ -1,0 +1,100 @@
+.divContentFilter {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100dvw;
+  height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.295);
+  z-index: 10;
+
+  .divFilters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 25%;
+    min-height: 150px;
+    width: calc(200px);
+    max-width: 400px;
+    padding: 5%;
+    background-color: var(--colorPrimaryBlue);
+    border-radius: 10px;
+
+    .filterTitle {
+      display: flex;
+      height: 20px;
+      width: 100%;
+      gap: 2%;
+
+      & input {
+        width: 100%;
+      }
+    }
+
+    .divfilteres {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2%;
+      width: 100%;
+      height: 20px;
+
+      & select {
+        background: linear-gradient(
+          to bottom,
+          var(--colorPrimaryOrange),
+          var(--colorSecundaryOrange)
+        );
+        color: var(--colorPrimaryWhite);
+        font-weight: bold;
+        border-radius: 10px;
+        padding: 5px;
+        width: 100px;
+
+        & option {
+          color: var(--colorPrimaryBlack);
+        }
+      }
+
+      & select:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .butSaveFilter {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    bottom: 5%;
+    background: linear-gradient(
+      to bottom,
+      var(--colorPrimaryOrange),
+      var(--colorSecundaryOrange)
+    );
+    color: var(--colorPrimaryWhite);
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 5px;
+    width: 100px;
+  }
+
+  .butSaveFilter:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+.FilterClose {
+  display: none;
+}
+
+.FilterOpen {
+  display: flex;
+}

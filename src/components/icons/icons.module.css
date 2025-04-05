@@ -19,21 +19,61 @@
 .iconsDelete {
   display: flex;
   color: var(--colorPrimaryRed);
-  height: 20px;
-  width: 20px;
+  height: 17px;
+  width: 17px;
 }
 
 .iconsCheck {
   display: flex;
-  color: var(--colorPrimaryGreen);
+  height: 17px;
+  width: 17px;
+  color: var(--colorPrimaryWhite);
+}
+
+.iconsCheckedChecked {
+  display: flex;
+  height: 16px;
+  width: 16px;
+  background: var(--colorSecundaryGreen);
+  border-radius: 50%;
+}
+
+.iconsReturn {
+  display: flex;
+  height: 16px;
+  width: 16px;
+  color: var(--colorPrimaryWhite);
+}
+
+.iconsClosefilter {
+  display: flex;
+  position: absolute;
+  color: var(--colorPrimaryWhite);
+  top: 2%;
+  right: 2%;
   height: 20px;
   width: 20px;
+}
+
+.butSelect {
+  display: flex;
+  color: var(--colorPrimaryWhite);
+  height: 17px;
+  width: 20px;
+  transform: rotate(45deg);
+}
+
+.butSelect:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transform: rotate(45deg);
 }
 
 .iconsSearch:hover,
 .iconsAdd:hover,
 .iconsDelete:hover,
-.iconsCheck:hover {
+.iconsCheck:hover,
+.iconsClosefilter:hover {
   cursor: pointer;
   transform: scale(1.1);
 }
