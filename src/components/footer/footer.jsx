@@ -4,7 +4,7 @@ import { useState } from "react";
 import FormCard from "../formCard/formCard";
 import FormCategory from "../formCategory/formCategory";
 
-export default function Footer({ categories }) {
+export default function Footer({ task, categories }) {
   const [select, setSelect] = useState(false);
   const [formCategory, setFormCategory] = useState(false);
   const [formCard, setFormCard] = useState(false);
@@ -15,11 +15,10 @@ export default function Footer({ categories }) {
 
   return (
     <div className={style.divFooter}>
-      <div className={style.butAdd}>
+      <div className={style.butAdd} onClick={HandlePageRegister}>
         <Icons
           name={"Plus"}
           className={`${select ? "butSelect" : "iconsAdd"}`}
-          onClick={HandlePageRegister}
         />
       </div>
       <div
@@ -34,6 +33,7 @@ export default function Footer({ categories }) {
       </div>
 
       <FormCard
+        task={task}
         select={select}
         setSelect={setSelect}
         categories={categories}

@@ -33,7 +33,7 @@
   .divContentButonsRegister {
     position: absolute;
     gap: 10px;
-    top: -50%;
+    top: -60%;
 
     & button {
       display: flex;
@@ -65,4 +65,12 @@
 
 .selectRegisterClose {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .divFooter {
+    .divContentButonsRegister {
+      top: -80%;
+    }
+  }
 }

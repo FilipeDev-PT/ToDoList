@@ -1,5 +1,6 @@
 import style from "./filter.module.css";
 import Icons from "../icons/icons";
+import { useState } from "react";
 
 export default function Filter({
   setTasksFiltered,
@@ -8,31 +9,23 @@ export default function Filter({
   search,
   setSearch,
 }) {
-  const HandleSearchTasks = (e) => {
-    setTasksFiltered(
-      task.filter((x) =>
-        x.title.toLocaleLowerCase().includes(e.toLocaleLowerCase())
-      )
-    );
-  };
+  const [category, setCategory] = useState("");
+  const [status, setStatus] = useState("");
 
-  const handleSearchStatus = (e) => {
-    if (e == "") {
-      setTasksFiltered(task);
-    } else {
-      setTasksFiltered(task.filter((x) => x.isCompleted.toString() === e));
+  const handleSearch = () => {
+    var array = task;
+    if (status != "") {
+      array = task.filter((x) => x.isCompleted.toString() == status);
     }
-  };
-  const handleSearchCategories = (e) => {
-    if (e == "") {
-      setTasksFiltered(task);
-    } else {
-      setTasksFiltered(
-        task.filter(
-          (x) => x.category.toLocaleLowerCase() == e.toLocaleLowerCase()
-        )
+
+    if (category != "") {
+      array = task.filter(
+        (x) => x.category.toLocaleLowerCase() == category.toLocaleLowerCase()
       );
     }
+
+    setTasksFiltered(array);
+    setSearch(!search);
   };
 
   return (
@@ -49,17 +42,9 @@ export default function Filter({
         />
         <h2>Filtros</h2>
 
-        <div className={style.filterTitle}>
-          <input
-            type="text"
-            onChange={(e) => HandleSearchTasks(e.target.value)}
-            placeholder="Pesquisar"
-          />
-        </div>
-
         <div className={style.divfilteres}>
           <div>
-            <select onChange={(e) => handleSearchCategories(e.target.value)}>
+            <select onChange={(e) => setCategory(e.target.value)}>
               <option value="">Categoria</option>
               {categories.map((iten, index) => {
                 return (
@@ -72,14 +57,16 @@ export default function Filter({
           </div>
 
           <div>
-            <select onChange={(e) => handleSearchStatus(e.target.value)}>
+            <select onChange={(e) => setStatus(e.target.value)}>
               <option value="">Status</option>
               <option value={true}>Concluidos</option>
               <option value={false}>Pendente</option>
             </select>
           </div>
         </div>
-        <button className={style.butSaveFilter}>Salvar</button>
+        <button className={style.butSaveFilter} onClick={handleSearch}>
+          Aplicar
+        </button>
       </div>
     </div>
   );

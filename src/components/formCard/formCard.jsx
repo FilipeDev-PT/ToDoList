@@ -4,6 +4,7 @@ import { PostTask } from "../../requests/itensTeste";
 import Icons from "../icons/icons";
 
 export default function FormCard({
+  task,
   select,
   setSelect,
   categories,
@@ -14,28 +15,41 @@ export default function FormCard({
   const [category, setCategory] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [cardExist, setCardExist] = useState(false);
 
   const HandleSubmitFormTask = async (title, category) => {
-    setLoading(true);
-    try {
-      if (!title || !category) return;
-      const newTask = {
-        title: title,
-        categoryId: category,
-      };
-      const response = await PostTask(newTask);
-      console.log(response);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-      window.location.reload();
+    verifyCardExist();
+    if (cardExist) {
+      setLoading(true);
+      try {
+        if (!title || !category) return;
+        const newTask = {
+          title: title,
+          categoryId: category,
+        };
+        const response = await PostTask(newTask);
+        console.log(response);
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
+        window.location.reload();
+      }
     }
   };
 
   const handleCloseForm = () => {
     setSelect(!select);
     setFormCard(!formCard);
+  };
+
+  const verifyCardExist = () => {
+    const categora = task.filter(
+      (x) => x.title == title && x.categoryId == category
+    );
+    if (categora != "") {
+      setCardExist(true);
+    }
   };
 
   return (
@@ -53,7 +67,7 @@ export default function FormCard({
             className="iconsClosefilter"
             onClick={handleCloseForm}
           />
-          <h2>Cadastrar Nova Tarefa</h2>
+          <h4>Cadastrar Nova Tarefa</h4>
           <form
             action={() => HandleSubmitFormTask(title, category)}
             className={style.formCard}
@@ -63,6 +77,9 @@ export default function FormCard({
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Digite o titulo do novo card"
             />
+            <p className={cardExist ? style.pError : style.pDesbility}>
+              Categoria Já cadastrada
+            </p>
             <div>
               <select onChange={(e) => setCategory(e.target.value)}>
                 <option value="">Categoria</option>
@@ -74,10 +91,10 @@ export default function FormCard({
                   );
                 })}
               </select>
-              <button type="submit" className={style.butAddNewTask}>
-                Criar Tarefa
-              </button>
             </div>
+            <button type="submit" className={style.butAddNewTask}>
+              Criar Tarefa
+            </button>
           </form>
         </div>
       </div>

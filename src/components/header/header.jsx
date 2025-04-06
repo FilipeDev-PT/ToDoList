@@ -20,6 +20,14 @@ export default function Header({
     setSearch(!search);
   };
 
+  const HandleSearchTasks = (e) => {
+    setTasksFiltered(
+      task.filter((x) =>
+        x.title.toLocaleLowerCase().includes(e.toLocaleLowerCase())
+      )
+    );
+  };
+
   return (
     <div className={style.divHeader}>
       <div className={style.divContentTitleIcons}>
@@ -28,6 +36,13 @@ export default function Header({
           name={"Search"}
           className={"iconsSearch"}
           onClick={HadleFilterSearch}
+        />
+      </div>
+      <div className={style.filterTitle}>
+        <input
+          type="text"
+          onChange={(e) => HandleSearchTasks(e.target.value)}
+          placeholder="Pesquisar"
         />
       </div>
       <Filter

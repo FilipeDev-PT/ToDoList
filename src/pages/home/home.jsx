@@ -25,6 +25,19 @@ export default function Home() {
     setLoading(true);
     try {
       const responses = await getAllTask();
+      const statusOrder = [false, true];
+
+      responses.sort((a, b) => {
+        const indexA = statusOrder.indexOf(a.isCompleted);
+        const indexB = statusOrder.indexOf(b.isCompleted);
+
+        if (indexA === indexB) {
+          return 0;
+        }
+
+        return indexA - indexB;
+      });
+
       setTasks(responses);
       setTasksFiltered(responses);
       const response = await getAllCategories();
@@ -49,7 +62,7 @@ export default function Home() {
           setSearch={setSearch}
         />
         <Map tasksFiltered={tasksFiltered} />
-        <Footer categories={categories} />
+        <Footer task={tasks} categories={categories} />
       </Layout>
     </>
   );

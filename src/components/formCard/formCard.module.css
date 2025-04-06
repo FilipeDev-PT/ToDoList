@@ -13,7 +13,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    text-align: center;
     position: relative;
     height: 25%;
     min-height: 150px;
@@ -22,19 +23,22 @@
     padding: 5%;
     background-color: var(--colorPrimaryBlue);
     border-radius: 10px;
+    color: var(--colorPrimaryWhite);
+    gap: 10px;
 
     .formCard {
       display: flex;
       flex-direction: column;
-      gap: 2%;
       width: 100%;
       align-items: center;
       justify-content: center;
 
       & div {
         display: flex;
+        position: relative;
         gap: 2%;
         width: 50%;
+        margin-top: 5%;
 
         & select {
           background: linear-gradient(
@@ -57,45 +61,29 @@
           cursor: pointer;
           transform: scale(1.05);
         }
-
-        .butAddNewTask {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 5px;
-          background: linear-gradient(
-            to bottom,
-            var(--colorPrimaryOrange),
-            var(--colorSecundaryOrange)
-          );
-          color: white;
-          font-weight: bolder;
-          border-radius: 10px;
-        }
-
-        .butAddNewTask:hover {
-          cursor: pointer;
-          transform: scale(1.05);
-        }
       }
-    }
-  }
 
-  @media (max-width: 768px) {
-    .divFormCard {
-      padding-top: calc(20px + 2%);
+      .butAddNewTask {
+        display: flex;
+        position: absolute;
+        bottom: 5%;
+        align-items: center;
+        justify-content: center;
+        padding: 5px;
+        background: linear-gradient(
+          to bottom,
+          var(--colorPrimaryOrange),
+          var(--colorSecundaryOrange)
+        );
+        color: white;
+        font-weight: bolder;
+        border-radius: 10px;
+        width: 100px;
+      }
 
-      .formCard {
-        flex-direction: column;
-        gap: 10px;
-
-        & input {
-          width: 100%;
-        }
-
-        & div {
-          width: 100%;
-        }
+      .butAddNewTask:hover {
+        cursor: pointer;
+        transform: scale(1.05);
       }
     }
   }
@@ -107,4 +95,24 @@
 
 .formCardClose {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .containerFormCard {
+    .divFormCard {
+      height: 40%;
+    }
+  }
+}
+
+.pError {
+  display: flex;
+  font-size: 0.7em;
+  margin-top: 5px;
+  color: var(--colorSecundaryRed);
+}
+
+.pDesbility {
+  display: none;
+  font-size: 0.3em;
 }
