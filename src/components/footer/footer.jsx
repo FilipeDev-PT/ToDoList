@@ -42,6 +42,7 @@ export default function Footer({ task, categories }) {
       />
 
       <FormCategory
+        task={task}
         select={select}
         setSelect={setSelect}
         categories={categories}

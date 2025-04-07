@@ -8,7 +8,6 @@ import Footer from "../../components/footer/footer";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [tasksFiltered, setTasksFiltered] = useState([]);
@@ -28,14 +27,14 @@ export default function Home() {
       const statusOrder = [false, true];
 
       responses.sort((a, b) => {
-        const indexA = statusOrder.indexOf(a.isCompleted);
-        const indexB = statusOrder.indexOf(b.isCompleted);
+        const Conpleted = statusOrder.indexOf(a.isCompleted);
+        const pendent = statusOrder.indexOf(b.isCompleted);
 
-        if (indexA === indexB) {
+        if (Conpleted === pendent) {
           return 0;
         }
 
-        return indexA - indexB;
+        return Conpleted - pendent;
       });
 
       setTasks(responses);
@@ -43,7 +42,7 @@ export default function Home() {
       const response = await getAllCategories();
       setCategories(response);
     } catch {
-      setError(true);
+      console.error("Erro na requisição");
     } finally {
       setLoading(false);
     }
@@ -52,7 +51,6 @@ export default function Home() {
   return (
     <>
       {loading ? <Loading /> : ""}
-      {error ? <Loading /> : ""}
       <Layout>
         <Header
           setTasksFiltered={setTasksFiltered}

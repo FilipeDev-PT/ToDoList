@@ -1,6 +1,7 @@
 import style from "./filter.module.css";
 import Icons from "../icons/icons";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Filter({
   setTasksFiltered,
@@ -11,6 +12,20 @@ export default function Filter({
 }) {
   const [category, setCategory] = useState("");
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setSearch(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   const handleSearch = () => {
     var array = task;
@@ -46,6 +61,7 @@ export default function Filter({
           <div>
             <select onChange={(e) => setCategory(e.target.value)}>
               <option value="">Categoria</option>
+              <option value="">Todos</option>
               {categories.map((iten, index) => {
                 return (
                   <option key={index} value={iten.name}>
@@ -59,6 +75,7 @@ export default function Filter({
           <div>
             <select onChange={(e) => setStatus(e.target.value)}>
               <option value="">Status</option>
+              <option value="">Todos</option>
               <option value={true}>Concluidos</option>
               <option value={false}>Pendente</option>
             </select>

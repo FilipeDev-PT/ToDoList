@@ -3,17 +3,17 @@ import Icons from "../icons/icons";
 import { useState } from "react";
 import { PutTask } from "../../requests/itensTeste";
 import { DeleteTask } from "../../requests/itensTeste";
+import Loading from "../loading/loading";
 
 export default function Tasks({ id, title, category, IsCompleted, index }) {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
   const HandleCompleteTask = async (id) => {
     setLoading(true);
     try {
       await PutTask(id);
     } catch {
-      setError(true);
+      console.error("Erro na requisição");
     } finally {
       setLoading(false);
       window.location.reload();
@@ -25,7 +25,7 @@ export default function Tasks({ id, title, category, IsCompleted, index }) {
     try {
       await DeleteTask(id);
     } catch {
-      setError(true);
+      console.error("Erro na requisição");
     } finally {
       setLoading(false);
       window.location.reload();
@@ -35,7 +35,6 @@ export default function Tasks({ id, title, category, IsCompleted, index }) {
   return (
     <>
       {loading ? <Loading /> : ""}
-      {error ? <Loading /> : ""}
       <div key={index} className={style.divContentTask}>
         <p className={style.pCont}># {index + 1}</p>
         <div className={style.iconsChecked}>

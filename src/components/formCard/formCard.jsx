@@ -2,6 +2,8 @@ import style from "./formCard.module.css";
 import { useState } from "react";
 import { PostTask } from "../../requests/itensTeste";
 import Icons from "../icons/icons";
+import Loading from "../loading/loading";
+import { useEffect } from "react";
 
 export default function FormCard({
   task,
@@ -14,15 +16,40 @@ export default function FormCard({
   const [title, setTitle] = useState();
   const [category, setCategory] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [cardExist, setCardExist] = useState(false);
+  const [categoryMissing, setCategoryMissing] = useState(false);
+  const [titleWhite, setTitlewhite] = useState(false);
 
-  const HandleSubmitFormTask = async (title, category) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setFormCard(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const HandleSubmitFormTask = async (event, title, category) => {
+    event.preventDefault();
     verifyCardExist();
-    if (cardExist) {
+    if (!cardExist) {
+      if (title.trim() == undefined || title.trim() == "") {
+        setTitlewhite(true);
+        return;
+      } else {
+        setTitlewhite(false);
+      }
+      if (!title || !category) {
+        setCategoryMissing(true);
+        return;
+      }
       setLoading(true);
       try {
-        if (!title || !category) return;
         const newTask = {
           title: title,
           categoryId: category,
@@ -30,7 +57,7 @@ export default function FormCard({
         const response = await PostTask(newTask);
         console.log(response);
       } catch {
-        setError(true);
+        console.error("Erro na requisição");
       } finally {
         setLoading(false);
         window.location.reload();
@@ -55,7 +82,6 @@ export default function FormCard({
   return (
     <>
       {loading ? <Loading /> : ""}
-      {error ? <Loading /> : ""}
       <div
         className={`${style.containerFormCard} ${
           formCard ? style.formCardOpen : style.formCardClose
@@ -69,7 +95,7 @@ export default function FormCard({
           />
           <h4>Cadastrar Nova Tarefa</h4>
           <form
-            action={() => HandleSubmitFormTask(title, category)}
+            onSubmit={(event) => HandleSubmitFormTask(event, title, category)}
             className={style.formCard}
           >
             <input
@@ -78,7 +104,13 @@ export default function FormCard({
               placeholder="Digite o titulo do novo card"
             />
             <p className={cardExist ? style.pError : style.pDesbility}>
-              Categoria Já cadastrada
+              Tarefa Já cadastrada
+            </p>
+            <p className={categoryMissing ? style.pError : style.pDesbility}>
+              Categoria faltante
+            </p>
+            <p className={titleWhite ? style.pError : style.pDesbility}>
+              Titulo em branco
             </p>
             <div>
               <select onChange={(e) => setCategory(e.target.value)}>

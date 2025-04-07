@@ -2,8 +2,11 @@ import style from "./formCategory.module.css";
 import { useState } from "react";
 import Icons from "../icons/icons";
 import { PostCategories, DeleteCategories } from "../../requests/itensTeste";
+import Loading from "../loading/loading";
+import { useEffect } from "react";
 
 export default function FormCategory({
+  task,
   select,
   setSelect,
   categories,
@@ -12,12 +15,35 @@ export default function FormCategory({
 }) {
   const [name, setName] = useState();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [categoryExist, setCategoryExist] = useState(false);
+  const [categoryUse, setCategoryUsed] = useState(false);
+  const [nameWhite, setNameWhite] = useState(false);
 
-  const HandleSubmitFormCategories = async (name) => {
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setFormCategory(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  const HandleSubmitFormCategories = async (event, name) => {
+    event.preventDefault();
     verifyCategoriesExist();
-    if (categoryExist) {
+    if (name.trim() == "" || name.trim() == undefined) {
+      setNameWhite(true);
+      return;
+    } else {
+      setNameWhite(false);
+    }
+
+    if (!categoryExist || !categoryUse) {
       setLoading(true);
       try {
         if (!name) return;
@@ -27,7 +53,7 @@ export default function FormCategory({
         const response = await PostCategories(newCategory);
         console.log(response);
       } catch {
-        setError(true);
+        console.error("Erro na requisição");
       } finally {
         setLoading(false);
         window.location.reload();
@@ -37,10 +63,11 @@ export default function FormCategory({
 
   const HandleDeleteCategories = async (id) => {
     setLoading(true);
+    verifyUsedCategory(id);
     try {
       await DeleteCategories(id);
     } catch {
-      setError(true);
+      console.error("Erro na requisição");
     } finally {
       setLoading(false);
       window.location.reload();
@@ -59,10 +86,16 @@ export default function FormCategory({
     }
   };
 
+  const verifyUsedCategory = (id) => {
+    const verifyUsed = task.filter((x) => x.categoryId == id);
+    if (verifyUsed != "") {
+      setCategoryUsed(true);
+    }
+  };
+
   return (
     <>
       {loading ? <Loading /> : ""}
-      {error ? <Loading /> : ""}
       <div
         className={`${style.containerFormCategories} ${
           formCategory ? style.formCategoryOpen : style.formCategoryClose
@@ -75,7 +108,7 @@ export default function FormCategory({
             onClick={handleCloseForm}
           />
           <h4>Cadastrar Nova Categoria</h4>
-          <form action={() => HandleSubmitFormCategories(name)}>
+          <form onSubmit={(event) => HandleSubmitFormCategories(event, name)}>
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
@@ -83,6 +116,12 @@ export default function FormCategory({
             />
             <p className={categoryExist ? style.pError : style.pDesbility}>
               Categoria Já cadastrada
+            </p>
+            <p className={categoryUse ? style.pError : style.pDesbility}>
+              Categoria com Tarefa cadastrada!
+            </p>
+            <p className={nameWhite ? style.pError : style.pDesbility}>
+              Nome da categoria em branco
             </p>
             <button type="submit">Criar Categoria</button>
           </form>
