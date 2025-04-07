@@ -4,7 +4,7 @@
   align-items: center;
   color: white;
   margin-top: calc(20px + 3%);
-  width: 95%;
+  width: 100%;
   gap: 10px;
 
   .divContentTitleIcons {
@@ -21,7 +21,7 @@
     gap: 2%;
 
     & input {
-      width: 80%;
+      width: 90%;
     }
   }
 }

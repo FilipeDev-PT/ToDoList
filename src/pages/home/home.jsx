@@ -3,7 +3,7 @@ import Header from "../../components/header/header";
 import Map from "../../components/map/map";
 import { useState, useEffect } from "react";
 import Loading from "../../components/loading/loading";
-import { getAllTask, getAllCategories } from "../../requests/itensTeste";
+import { getAllTask, getAllCategories } from "../../requests/requests";
 import Footer from "../../components/footer/footer";
 
 export default function Home() {
@@ -14,10 +14,7 @@ export default function Home() {
   const [search, setSearch] = useState(false);
 
   useEffect(() => {
-    const Effect = () => {
-      loadingTry();
-    };
-    Effect();
+    loadingTry();
   }, []);
 
   const loadingTry = async () => {

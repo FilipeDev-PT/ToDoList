@@ -1,6 +1,6 @@
 import style from "./formCard.module.css";
 import { useState } from "react";
-import { PostTask } from "../../requests/itensTeste";
+import { PostTask } from "../../requests/requests";
 import Icons from "../icons/icons";
 import Loading from "../loading/loading";
 import { useEffect } from "react";
@@ -34,7 +34,7 @@ export default function FormCard({
     };
   }, []);
 
-  const HandleSubmitFormTask = async (event, title, category) => {
+  const handleSubmitFormTask = async (event, title, category) => {
     event.preventDefault();
     verifyCardExist();
     if (!cardExist) {
@@ -95,7 +95,7 @@ export default function FormCard({
           />
           <h4>Cadastrar Nova Tarefa</h4>
           <form
-            onSubmit={(event) => HandleSubmitFormTask(event, title, category)}
+            onSubmit={(event) => handleSubmitFormTask(event, title, category)}
             className={style.formCard}
           >
             <input

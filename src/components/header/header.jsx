@@ -1,6 +1,5 @@
 import style from "./header.module.css";
 import Icons from "../icons/icons";
-import { useNavigate } from "react-router-dom";
 import Filter from "../filter/filter";
 
 export default function Header({
@@ -10,17 +9,11 @@ export default function Header({
   search,
   setSearch,
 }) {
-  const navigate = useNavigate();
-
-  const HandlePageRegister = () => {
-    navigate("/ToDoList/register");
-  };
-
-  const HadleFilterSearch = () => {
+  const hadleFilterSearch = () => {
     setSearch(!search);
   };
 
-  const HandleSearchTasks = (e) => {
+  const handleSearchTasks = (e) => {
     setTasksFiltered(
       task.filter((x) =>
         x.title.toLocaleLowerCase().includes(e.toLocaleLowerCase())
@@ -35,13 +28,13 @@ export default function Header({
         <Icons
           name={"Search"}
           className={"iconsSearch"}
-          onClick={HadleFilterSearch}
+          onClick={hadleFilterSearch}
         />
       </div>
       <div className={style.filterTitle}>
         <input
           type="text"
-          onChange={(e) => HandleSearchTasks(e.target.value)}
+          onChange={(e) => handleSearchTasks(e.target.value)}
           placeholder="Pesquisar"
         />
       </div>

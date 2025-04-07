@@ -1,7 +1,7 @@
 import style from "./formCategory.module.css";
 import { useState } from "react";
 import Icons from "../icons/icons";
-import { PostCategories, DeleteCategories } from "../../requests/itensTeste";
+import { PostCategories, DeleteCategories } from "../../requests/requests";
 import Loading from "../loading/loading";
 import { useEffect } from "react";
 
@@ -33,7 +33,7 @@ export default function FormCategory({
     };
   }, []);
 
-  const HandleSubmitFormCategories = async (event, name) => {
+  const handleSubmitFormCategories = async (event, name) => {
     event.preventDefault();
     verifyCategoriesExist();
     if (name.trim() == "" || name.trim() == undefined) {
@@ -61,7 +61,7 @@ export default function FormCategory({
     }
   };
 
-  const HandleDeleteCategories = async (id) => {
+  const handleDeleteCategories = async (id) => {
     setLoading(true);
     verifyUsedCategory(id);
     try {
@@ -108,7 +108,7 @@ export default function FormCategory({
             onClick={handleCloseForm}
           />
           <h4>Cadastrar Nova Categoria</h4>
-          <form onSubmit={(event) => HandleSubmitFormCategories(event, name)}>
+          <form onSubmit={(event) => handleSubmitFormCategories(event, name)}>
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
@@ -137,7 +137,7 @@ export default function FormCategory({
                     <div>
                       <Icons
                         name={"Trash2"}
-                        onClick={() => HandleDeleteCategories(category.id)}
+                        onClick={() => handleDeleteCategories(category.id)}
                         className={"iconsDelete"}
                       />
                     </div>

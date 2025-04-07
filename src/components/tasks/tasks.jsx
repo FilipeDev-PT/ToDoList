@@ -1,14 +1,14 @@
 import style from "./tasks.module.css";
 import Icons from "../icons/icons";
 import { useState } from "react";
-import { PutTask } from "../../requests/itensTeste";
-import { DeleteTask } from "../../requests/itensTeste";
+import { PutTask } from "../../requests/requests";
+import { DeleteTask } from "../../requests/requests";
 import Loading from "../loading/loading";
 
 export default function Tasks({ id, title, category, IsCompleted, index }) {
   const [loading, setLoading] = useState(false);
 
-  const HandleCompleteTask = async (id) => {
+  const handleCompleteTask = async (id) => {
     setLoading(true);
     try {
       await PutTask(id);
@@ -20,7 +20,7 @@ export default function Tasks({ id, title, category, IsCompleted, index }) {
     }
   };
 
-  const HandleDeleteTask = async (id) => {
+  const handleDeleteTask = async (id) => {
     setLoading(true);
     try {
       await DeleteTask(id);
@@ -39,8 +39,8 @@ export default function Tasks({ id, title, category, IsCompleted, index }) {
         <p className={style.pCont}># {index + 1}</p>
         <div className={style.iconsChecked}>
           <Icons
-            name={"Circle"}
-            onClick={() => HandleCompleteTask(id)}
+            name={`${IsCompleted ? "CircleCheck" : "Circle"}`}
+            onClick={() => handleCompleteTask(id)}
             className={`${IsCompleted ? "iconsCheckedChecked" : "iconsCheck"}`}
           />
         </div>
@@ -62,7 +62,7 @@ export default function Tasks({ id, title, category, IsCompleted, index }) {
         <div className={style.iconsDelete}>
           <Icons
             name={"Trash2"}
-            onClick={() => HandleDeleteTask(id)}
+            onClick={() => handleDeleteTask(id)}
             className={"iconsDelete"}
           />
         </div>

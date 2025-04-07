@@ -9,13 +9,13 @@ export default function Footer({ task, categories }) {
   const [formCategory, setFormCategory] = useState(false);
   const [formCard, setFormCard] = useState(false);
 
-  const HandlePageRegister = () => {
+  const handlePageRegister = () => {
     setSelect(!select);
   };
 
   return (
     <div className={style.divFooter}>
-      <div className={style.butAdd} onClick={HandlePageRegister}>
+      <div className={style.butAdd} onClick={handlePageRegister}>
         <Icons
           name={"Plus"}
           className={`${select ? "butSelect" : "iconsAdd"}`}
